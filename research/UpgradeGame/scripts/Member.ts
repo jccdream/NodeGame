@@ -33,7 +33,7 @@ namespace jcc.game{
         }
         set status(value:MemberStatus){
             this._status = value;
-            this.statusChanged.raise(this,this,{});
+            this.statusChanged.raise(this,{});
         }
     }
     

@@ -2,6 +2,7 @@ namespace jcc.game{
     export class UpgradeGame{
         private _name:string;
         private _members: Member[] = [];
+        private _cards: Card[];
         
         get name(): string{
             return this._name;
@@ -11,6 +12,15 @@ namespace jcc.game{
         }
         
         start(): void{
+            this._startRound();
+        }
+        
+        _startRound(){
+            this._initCards();
+            this._sendCards();
+        }
+        
+        _initCards(){
             
         }
         
