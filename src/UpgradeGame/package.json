@@ -1,0 +1,14 @@
+{
+  "name": "UpgradeGame",
+  "version": "0.0.1",
+  "description": "Upgrade Game. It is also called as 80 scores in Chinese.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "jcc",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
+}
