@@ -9,6 +9,11 @@
   "author": "jcc",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.13.4"
+    "express": "^4.13.4",
+    "body-parser": "^1.15.0",
+    "multer": "^1.1.0",
+    "guid": "0.0.12",
+    "path": "^0.12.7",
+    "ejs": "^2.4.1"
   }
 }

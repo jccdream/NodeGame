@@ -1,10 +1,27 @@
-/// <reference path="typings/express/express.d.ts"/>
-/// <reference path="typings/node/node.d.ts"/>
 var express = require('express');
+var bodyParser = require('body-parser');
+var multer = require('multer');
+var routes = require('./routes');
+var path = require('path');
+var guid = require('guid');
 var app = express();
-app.get('/', function (req, res) {
-    res.send('Hello World!');
+app.use(express.static('public'));
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+app.use(multer().any()); // for parsing multipart/form-data
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+app.post('/play', routes.play);
+app.use('/', routes.index);
+/*app.get('/', (req, res) =>{
+    res.send('Welcome to Upgrade Game!');
 });
+
+app.route('/user')
+    .post((req, res)=>{
+        console.log(req.body);
+        res.json(req.body);
+    });*/
 var server = app.listen(3001, function () {
     var host = server.address().address;
     var port = server.address().port;
