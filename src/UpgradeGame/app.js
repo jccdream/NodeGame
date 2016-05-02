@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
 app.use(multer().any()); // for parsing multipart/form-data
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-app.post('/play', routes.play);
+app.post('/table', routes.table);
 app.use('/', routes.index);
 /*app.get('/', (req, res) =>{
     res.send('Welcome to Upgrade Game!');

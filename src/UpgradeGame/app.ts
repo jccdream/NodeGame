@@ -3,7 +3,6 @@ import bodyParser = require('body-parser');
 import multer = require('multer'); 
 var routes = require('./routes');
 var path = require('path');
-var guid = require('guid'); 
 
 var app = express();
 app.use(express.static('public'));
