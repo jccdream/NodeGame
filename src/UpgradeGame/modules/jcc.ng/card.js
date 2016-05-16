@@ -1,3 +1,4 @@
+var uuid = require('UUID');
 var jcc;
 (function (jcc) {
     var ng;
@@ -5,22 +6,49 @@ var jcc;
         var card;
         (function (card_1) {
             var Deck = (function () {
-                function Deck() {
+                function Deck(deckCount) {
+                    if (deckCount === void 0) { deckCount = 1; }
+                    this._deckCount = 1;
+                    this._deckCount = deckCount;
                 }
                 Object.defineProperty(Deck.prototype, "cards", {
                     get: function () {
                         if (!this._cards) {
-                            this._cards = this._createCards();
+                            this._initCards();
                         }
                         return this._cards;
                     },
                     enumerable: true,
                     configurable: true
                 });
-                Deck.prototype._createCards = function () {
-                    var cards = [];
-                    for (var index = 1; index < 14; index++) {
-                        var card = new PokerCard();
+                Deck.prototype._initCards = function () {
+                    this._cards = Deck.createCards(this._deckCount);
+                    Deck.shuffle(this._cards);
+                };
+                Deck.createCards = function (deckCount) {
+                    if (deckCount === void 0) { deckCount = 1; }
+                    deckCount = Math.max(1, deckCount);
+                    var cards = [], colors = [PokerColor.Heart, PokerColor.Spade, PokerColor.Diamond, PokerColor.Club];
+                    for (var deckIndex = 0; deckIndex < deckCount; deckIndex++) {
+                        colors.forEach(function (c) {
+                            for (var index = 1; index < 14; index++) {
+                                var card = new PokerCard(uuid.generate(), c, index);
+                                cards.push(card);
+                            }
+                        });
+                        cards.push(new PokerCard(uuid.generate(), PokerColor.LittleJoker));
+                        cards.push(new PokerCard(uuid.generate(), PokerColor.BigJoker));
+                    }
+                    return cards;
+                };
+                Deck.shuffle = function (cards) {
+                    if (!cards) {
+                        return;
+                    }
+                    for (var index = 0, length = cards.length; index < length; index++) {
+                        var newPos = Math.floor(Math.random() * length);
+                        var elements = cards.splice(index, 1, cards[newPos]);
+                        cards.splice(newPos, 0, elements[0]);
                     }
                 };
                 return Deck;

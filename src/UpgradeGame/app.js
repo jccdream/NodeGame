@@ -3,7 +3,6 @@ var bodyParser = require('body-parser');
 var multer = require('multer');
 var routes = require('./routes');
 var path = require('path');
-var guid = require('guid');
 var app = express();
 app.use(express.static('public'));
 app.use(bodyParser.json()); // for parsing application/json

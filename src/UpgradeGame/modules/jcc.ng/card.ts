@@ -1,11 +1,13 @@
-import uuid = require('UUID');
+var uuid = require('UUID');
 
-namespace jcc.ng.card {
+namespace jcc.ng.card{
     export class Deck {
         private _cards: PokerCard[];
         private _deckCount = 1;
-        
-               
+
+        constructor(deckCount:number = 1){
+            this._deckCount = deckCount;
+        }
 
         get cards(): PokerCard[] {
             if (!this._cards) {
@@ -16,7 +18,7 @@ namespace jcc.ng.card {
         }
 
         private _initCards() {
-            this._cards = Deck.createCards();
+            this._cards = Deck.createCards(this._deckCount);
             Deck.shuffle(this._cards);
         }
 
