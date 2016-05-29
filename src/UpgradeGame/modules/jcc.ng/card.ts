@@ -58,10 +58,16 @@ namespace jcc.ng.card{
 
         private _id: string;
         private _color: PokerColor;
-        private _points: number;
+        private _points: PokerPoints;
 
-        constructor(id: string, color: PokerColor, points?: number) {
+        constructor(id: string, color: PokerColor, points?: PokerPoints) {
             this._color = color;
+            if(color === PokerColor.BigJoker){
+                points = PokerPoints.BigJoker;
+            }else if(color === PokerColor.LittleJoker){
+                points = PokerPoints.LitteJoker;
+            }
+            
             this._points = points;
             this._id = id;
         }
@@ -124,5 +130,42 @@ namespace jcc.ng.card{
         Diamond,
         LittleJoker,
         BigJoker
+    }
+    
+    export enum PokerPoints {
+        A = 1,
+        Two = 2,
+        Three = 3,
+        Four = 4,
+        Fine = 5,
+        Six = 6,
+        Seven = 7,
+        Eight = 8,
+        Nine = 9,
+        Ten = 10,
+        J = 11,
+        Q = 12,
+        K = 13,
+        LitteJoker = 50,
+        BigJoker = 100        
+    }
+    
+    export function nextGrade(cur: PokerPoint, step: number = 1): PokerPoint {
+        var curValue = <number>cur;
+        var nextValue = curValue + step;
+        var gapWithK = nextValue - PokerPoint.K;
+        if(gapWithK <= 0){
+            return nextValue;
+        }
+        
+        if(gapWithK === 1){
+            return PokerPoint.A;
+        }
+        
+        if(gapWithK === 2){
+            return PokerPoint.LitteJoker;
+        }
+        
+        return PokerPoint.BigJoker;
     }
 }

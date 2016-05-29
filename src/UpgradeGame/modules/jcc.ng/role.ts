@@ -1,10 +1,26 @@
 module jcc.ng.role{
-    export class Member{
+    export class Member{        
+        public statusChanged = new Event();
+        
         private _name:string;
         private _id:string;
         private _status:MemberStatus;
+        private _isBanker = false;
+        private _grade:card.PokerPoint;
         
-        public statusChanged = new Event();
+        get grade(): card.PokerPoint{
+            return this._grade;
+        }       
+        set grade(value: card.PokerPoint){
+            this._grade = value;
+        }
+        
+        get isBanker(): boolean{
+            return this._isBanker;
+        }
+        set isBanker(value: boolean){
+            this._isBanker = value;
+        }
         
         get name(): string{
             return this._name;
@@ -35,6 +51,8 @@ module jcc.ng.role{
             this._status = value;
             this.statusChanged.raise(this,{});
         }
+        
+        
     }
     
     export enum MemberStatus{
